@@ -2,6 +2,7 @@ import React, { memo, FC, SyntheticEvent, useMemo } from 'react'
 import classNames from 'classnames'
 import { FormattedNumber } from 'react-intl'
 import { useCssHandles, applyModifiers } from 'vtex.css-handles'
+import { FormattedCurrency } from 'vtex.format-currency'
 
 import { slug, changeImageUrlSize } from '../utils'
 
@@ -20,6 +21,7 @@ interface Props {
   imageHeight?: number | string
   imageWidth?: number | string
   showBorders?: boolean
+  displayPrices?: boolean
 }
 
 const getDiscount = (maxPrice?: number | null, price?: number | null) => {
@@ -62,6 +64,7 @@ const SelectorItem: FC<Props> = ({
   imageHeight,
   imageWidth,
   showBorders = true,
+  displayPrices,
 }) => {
   const discount = getDiscount(maxPrice, price)
   const handles = useCssHandles(CSS_HANDLES, {
@@ -153,7 +156,15 @@ const SelectorItem: FC<Props> = ({
               alt={imageLabel as string | undefined}
             />
           ) : (
-            variationValue
+            <>
+              {variationValue}
+              {price && !isSelected && displayPrices && (
+                <>
+                  {' '}
+                  <FormattedCurrency value={price} />
+                </>
+              )}
+            </>
           )}
         </div>
       </div>

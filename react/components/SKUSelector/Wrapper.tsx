@@ -154,6 +154,7 @@ interface Props {
   sliderDisplayThreshold?: number
   sliderArrowSize?: number
   sliderItemsPerPage?: ResponsiveInput<number>
+  displayPrices?: boolean
 }
 
 function SKUSelectorWrapper(props: Props) {
@@ -234,6 +235,7 @@ function SKUSelectorWrapper(props: Props) {
       sliderItemsPerPage={props.sliderItemsPerPage}
       sliderArrowSize={props.sliderArrowSize}
       sliderDisplayThreshold={props.sliderDisplayThreshold}
+      displayPrices={props.displayPrices}
     />
   )
 }

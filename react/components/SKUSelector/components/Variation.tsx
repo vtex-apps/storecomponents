@@ -32,6 +32,7 @@ interface Props {
   sliderDisplayThreshold: number
   sliderArrowSize: number
   sliderItemsPerPage: ResponsiveInput<number>
+  displayPrices?: boolean
 }
 
 const ITEMS_VISIBLE_THRESHOLD = 2
@@ -59,6 +60,7 @@ const Variation: FC<Props> = ({
   sliderArrowSize,
   sliderDisplayThreshold,
   sliderItemsPerPage,
+  displayPrices,
 }) => {
   const { originalName, name, options } = variation
 
@@ -126,6 +128,8 @@ const Variation: FC<Props> = ({
         }
         imageLabel={option.image?.imageLabel}
         isImpossible={option.impossible}
+        price={option.price}
+        displayPrices={displayPrices}
       />
     )
   })
@@ -166,6 +170,7 @@ const Variation: FC<Props> = ({
             <SelectModeVariation
               selectedItem={selectedItem}
               displayOptions={displayOptions}
+              displayPrices={displayPrices}
             />
           ) : shouldUseSlider ? (
             <SliderLayout {...sliderConfigurationProps}>

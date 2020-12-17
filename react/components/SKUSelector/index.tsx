@@ -183,6 +183,7 @@ interface Props {
   sliderDisplayThreshold?: number
   sliderArrowSize?: number
   sliderItemsPerPage?: ResponsiveInput<number>
+  displayPrices?: boolean
 }
 
 const getNewSelectedVariations = (
@@ -248,6 +249,7 @@ const SKUSelectorContainer: FC<Props> = ({
     tablet: 2,
     phone: 1,
   },
+  displayPrices,
 }) => {
   const variationsCount = keyCount(variations)
   const { query } = useRuntime()
@@ -396,6 +398,7 @@ const SKUSelectorContainer: FC<Props> = ({
       sliderDisplayThreshold={sliderDisplayThreshold}
       sliderArrowSize={sliderArrowSize}
       sliderItemsPerPage={sliderItemsPerPage}
+      displayPrices={displayPrices}
     />
   )
 }

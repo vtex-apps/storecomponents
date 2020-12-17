@@ -4,6 +4,7 @@ import { useProduct, ProductContext } from 'vtex.product-context'
 import { getSKU } from 'sku-helper'
 
 import SKUSelector from '../../components/SKUSelector/Wrapper'
+import { DisplayMode } from '../../components/SKUSelector/types/index'
 
 describe('<SKUSelector />', () => {
   const renderComponent = (customProps = {}) => {
@@ -1407,5 +1408,210 @@ describe('<SKUSelector />', () => {
     )
 
     expect(queryByText('Yellow')).toBeFalsy()
+  })
+
+  it('should display prices if displayPrices set to true', async () => {
+    const defaultSeller = {
+      commertialOffer: { Price: 15, ListPrice: 20, AvailableQuantity: 10 },
+    }
+
+    const firstSku = {
+      itemId: '1',
+      name: 'Gray Shoe',
+      variations: [{ name: 'Size', values: ['41'] }],
+      sellers: [defaultSeller],
+      images: [],
+    }
+
+    mockedUseProduct.mockImplementation(
+      function getProductContext(): ProductContext {
+        return {
+          product: {
+            buyButton: {
+              clicked: false,
+            },
+            skuSelector: {
+              isVisible: true,
+              areAllVariationsSelected: true,
+            },
+            selectedItem: firstSku,
+            selectedQuantity: 1,
+            assemblyOptions: {
+              items: {},
+              areGroupsValid: {},
+              inputValues: {},
+            },
+            skuSpecifications: [
+              {
+                field: {
+                  name: 'Size',
+                  originalName: 'Size',
+                },
+                values: [
+                  {
+                    name: '43',
+                    originalName: '43',
+                  },
+                  {
+                    name: '42',
+                    originalName: '42',
+                  },
+                  {
+                    name: '41',
+                    originalName: '41',
+                  },
+                ],
+              },
+            ],
+          },
+        }
+      }
+    )
+
+    const skuItems = [
+      firstSku,
+      {
+        itemId: '2',
+        name: 'Black Shoe',
+        variations: [{ name: 'Size', values: ['41', '42', '43'] }],
+        sellers: [defaultSeller],
+        images: [],
+      },
+      {
+        itemId: '3',
+        name: 'Blue Shoe',
+        variations: [{ name: 'Size', values: ['41', '42', '43'] }],
+        sellers: [defaultSeller],
+        images: [],
+      },
+      {
+        itemId: '4',
+        name: 'Gray Shoe',
+        variations: [
+          {
+            name: 'Size',
+            values: ['42'],
+          },
+        ],
+        sellers: [defaultSeller],
+        images: [],
+      },
+    ]
+
+    const { getByText, queryByText } = render(
+      <SKUSelector
+        skuSelected={skuItems[0]}
+        skuItems={skuItems}
+        maxItems={6}
+        displayPrices
+      />
+    )
+
+    expect(getByText('42 $15.00')).toBeDefined()
+    // The next assertion ensures that the price will not be displayed for the selectedItem
+    expect(queryByText('41 $15.00')).toBeFalsy()
+  })
+
+  it('should display prices if displayPrices set to true and displayMode set to select', async () => {
+    const defaultSeller = {
+      commertialOffer: { Price: 15, ListPrice: 20, AvailableQuantity: 10 },
+    }
+
+    const firstSku = {
+      itemId: '1',
+      name: 'Gray Shoe',
+      variations: [{ name: 'Size', values: ['41'] }],
+      sellers: [defaultSeller],
+      images: [],
+    }
+
+    mockedUseProduct.mockImplementation(
+      function getProductContext(): ProductContext {
+        return {
+          product: {
+            buyButton: {
+              clicked: false,
+            },
+            skuSelector: {
+              isVisible: true,
+              areAllVariationsSelected: true,
+            },
+            selectedItem: firstSku,
+            selectedQuantity: 1,
+            assemblyOptions: {
+              items: {},
+              areGroupsValid: {},
+              inputValues: {},
+            },
+            skuSpecifications: [
+              {
+                field: {
+                  name: 'Size',
+                  originalName: 'Size',
+                },
+                values: [
+                  {
+                    name: '43',
+                    originalName: '43',
+                  },
+                  {
+                    name: '42',
+                    originalName: '42',
+                  },
+                  {
+                    name: '41',
+                    originalName: '41',
+                  },
+                ],
+              },
+            ],
+          },
+        }
+      }
+    )
+
+    const skuItems = [
+      firstSku,
+      {
+        itemId: '2',
+        name: 'Black Shoe',
+        variations: [{ name: 'Size', values: ['41', '42', '43'] }],
+        sellers: [defaultSeller],
+        images: [],
+      },
+      {
+        itemId: '3',
+        name: 'Blue Shoe',
+        variations: [{ name: 'Size', values: ['41', '42', '43'] }],
+        sellers: [defaultSeller],
+        images: [],
+      },
+      {
+        itemId: '4',
+        name: 'Gray Shoe',
+        variations: [
+          {
+            name: 'Size',
+            values: ['42'],
+          },
+        ],
+        sellers: [defaultSeller],
+        images: [],
+      },
+    ]
+
+    const { getByText, queryByText } = render(
+      <SKUSelector
+        skuSelected={skuItems[0]}
+        skuItems={skuItems}
+        maxItems={6}
+        displayMode={DisplayMode.select}
+        displayPrices
+      />
+    )
+
+    expect(getByText('42 - $15.00')).toBeDefined()
+    // The next assertion ensures that the price will not be displayed for the selectedItem
+    expect(queryByText('41 - $15.00')).toBeFalsy()
   })
 })

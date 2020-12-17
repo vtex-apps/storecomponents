@@ -57,6 +57,7 @@ interface Props {
   sliderDisplayThreshold: number
   sliderArrowSize: number
   sliderItemsPerPage: ResponsiveInput<number>
+  displayPrices?: boolean
 }
 
 const isSkuAvailable = compose<
@@ -138,6 +139,15 @@ const parseOptionNameToDisplayOption = ({
   if (possibleItems.length > 0) {
     // This is a valid combination option
     const [item] = possibleItems
+
+    const {
+      sellers: [
+        {
+          commertialOffer: { Price: price },
+        },
+      ],
+    } = item
+
     const callbackFn = onSelectItemMemo({
       name: variationName,
       value: variationValue.name,
@@ -158,6 +168,7 @@ const parseOptionNameToDisplayOption = ({
         isSelected,
       }),
       impossible: false,
+      price,
     }
   }
 
@@ -197,6 +208,7 @@ const variationNameToDisplayVariation = ({
 }) => (variationName: string): DisplayVariation => {
   const name = variationName
   const { values, originalName } = variations[variationName]
+
   const options = values
     .map(
       parseOptionNameToDisplayOption({
@@ -271,6 +283,7 @@ const SKUSelector: FC<Props> = ({
   sliderDisplayThreshold,
   sliderArrowSize,
   sliderItemsPerPage,
+  displayPrices,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const variationsSpacing = getValidMarginBottom(marginBottomProp)
@@ -354,6 +367,7 @@ const SKUSelector: FC<Props> = ({
             sliderDisplayThreshold={sliderDisplayThreshold}
             sliderArrowSize={sliderArrowSize}
             sliderItemsPerPage={sliderItemsPerPage}
+            displayPrices={displayPrices}
           />
         )
       })}
