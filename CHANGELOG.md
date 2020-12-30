@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - New keys to `product-images`.It prevent render problems when prefetch is enabled.
 
+### Added 
+- new classes to `sku-selector` component
+
 ## [3.138.1] - 2020-12-28
 ### Changed
 - Makes search placeholder translatable

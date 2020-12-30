@@ -1,4 +1,5 @@
-import React, { memo, SyntheticEvent, useMemo } from 'react'
+import type { SyntheticEvent } from 'react'
+import React, { memo, useMemo } from 'react'
 import classNames from 'classnames'
 import { FormattedNumber } from 'react-intl'
 
@@ -36,6 +37,8 @@ export const CSS_HANDLES = [
   'frameAround',
   'valueWrapper',
   'diagonalCross',
+  'skuItemAvailable',
+  'skuItemNotAvailable',
   'skuSelectorItem',
   'skuSelectorBadge',
   'skuSelectorItemImage',
@@ -110,7 +113,9 @@ function SelectorItem({
       tabIndex={0}
       onClick={onClick}
       style={containerStyles}
-      className={containerClasses}
+      className={`${containerClasses} ${
+        !isAvailable ? handles.skuItemNotAvailable : handles.skuItemAvailable
+      }`}
       onKeyDown={e => e.key === 'Enter' && onClick(e)}
     >
       <div

@@ -80,6 +80,8 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 | `seeMoreButton`                 |
 | `skuSelectorContainer`          |
 | `skuSelectorInternalBox`        |
+| `skuItemAvailable`              |
+| `skuItemNotAvailable`           |
 | `skuSelectorItemImageValue`     |
 | `skuSelectorItemImage`          |
 | `skuSelectorItemTextValue`      |
