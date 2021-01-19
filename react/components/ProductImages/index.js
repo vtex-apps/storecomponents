@@ -27,6 +27,7 @@ const ProductImages = ({
   thumbnailMaxHeight,
   showNavigationArrows,
   showPaginationDots,
+  showThumbnails,
   contentOrder = 'images-first',
   zoomMode,
   zoomFactor,
@@ -109,6 +110,21 @@ const ProductImages = ({
       </div>
     )
 
+  else if (displayMode === DISPLAY_MODE.FIRST_IMAGE)
+  return (
+    <div className={containerClass}>
+        <ProductImage
+          src={images[0].url}
+          alt={images[0].alt}
+          maxHeight={maxHeight}
+          zoomFactor={zoomFactor}
+          aspectRatio={aspectRatio}
+          ModalZoomElement={ModalZoomElement}
+          zoomMode={isZoomDisabled ? 'disabled' : zoomMode}
+        />
+    </div>
+  ) 
+
   return (
     <div className={containerClass}>
       <Carousel
@@ -126,6 +142,7 @@ const ProductImages = ({
         showNavigationArrows={showNavigationArrows}
         thumbnailsOrientation={thumbnailsOrientation}
         displayThumbnailsArrows={displayThumbnailsArrows}
+        showThumbnails={showThumbnails}
         // Deprecated
         zoomProps={zoomProps}
       />
@@ -181,6 +198,7 @@ ProductImages.propTypes = {
   thumbnailMaxHeight: PropTypes.number,
   showNavigationArrows: PropTypes.bool,
   showPaginationDots: PropTypes.bool,
+  showThumbnails: PropTypes.bool,
   contentOrder: PropTypes.oneOf(['images-first', 'videos-first']),
   zoomMode: PropTypes.oneOf([
     'disabled',
@@ -190,7 +208,7 @@ ProductImages.propTypes = {
   ]),
   zoomFactor: PropTypes.number,
   contentType: PropTypes.oneOf(['all', 'images', 'videos']),
-  displayMode: PropTypes.oneOf([DISPLAY_MODE.CAROUSEL, DISPLAY_MODE.LIST]),
+  displayMode: PropTypes.oneOf([DISPLAY_MODE.CAROUSEL, DISPLAY_MODE.LIST, DISPLAY_MODE.FIRST_IMAGE]),
 }
 
 ProductImages.defaultProps = {

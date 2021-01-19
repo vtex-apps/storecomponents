@@ -234,6 +234,7 @@ class Carousel extends Component {
       zoomProps: { zoomType },
       showPaginationDots = true,
       showNavigationArrows = true,
+      showThumbnails = true,
       displayThumbnailsArrows = false,
     } = this.props
 
@@ -256,11 +257,11 @@ class Carousel extends Component {
         'ml-20-ns w-80-ns pl5-ns':
           isThumbsVertical &&
           position === THUMBS_POSITION_HORIZONTAL.LEFT &&
-          (hasThumbs || !hasSlides),
+          ((hasThumbs && showThumbnails) || !hasSlides),
         'mr-20-ns w-80-ns pr5-ns':
           isThumbsVertical &&
           position === THUMBS_POSITION_HORIZONTAL.RIGHT &&
-          (hasThumbs || !hasSlides),
+          ((hasThumbs && showThumbnails) || !hasSlides),
       }
     )
 
@@ -289,11 +290,11 @@ class Carousel extends Component {
         'flex-ns justify-end-ns':
           isThumbsVertical &&
           position === THUMBS_POSITION_HORIZONTAL.LEFT &&
-          hasThumbs,
+          hasThumbs && showThumbnails,
         'flex-ns justify-start-ns':
           isThumbsVertical &&
           position === THUMBS_POSITION_HORIZONTAL.RIGHT &&
-          hasThumbs,
+          hasThumbs && showThumbnails,
       }
     )
 
@@ -312,8 +313,8 @@ class Carousel extends Component {
 
     return (
       <div className={containerClasses} aria-hidden="true">
-        {isThumbsVertical && thumbnailSwiper}
-
+        {(isThumbsVertical && showThumbnails) && thumbnailSwiper}
+      
         <div className={imageClasses}>
           {!this.state.thumbSwiper?.destroyed && (
             <Swiper
@@ -370,7 +371,7 @@ class Carousel extends Component {
             </Swiper>
           )}
 
-          {!isThumbsVertical && thumbnailSwiper}
+          {(!isThumbsVertical && showThumbnails) && thumbnailSwiper}
         </div>
       </div>
     )
@@ -389,6 +390,7 @@ Carousel.propTypes = {
   ),
   ModalZoomElement: PropTypes.any,
   displayThumbnailsArrows: PropTypes.bool,
+  showThumbnails: PropTypes.bool
 }
 
 export default withCssHandles(CSS_HANDLES)(Carousel)
