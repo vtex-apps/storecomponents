@@ -47,7 +47,7 @@
 | `position`                | `Enum`    | Set the position of the thumbnails (`left` or `right`). Only used when `thumbnailsOrientation` is `vertical` | `left`        |
 | `showNavigationArrows`             | `boolean`                                   | Controls if the navigation arrows should appear | `true`          |
 | `showPaginationDots`             | `boolean`                                   | Controls if the pagination dots should appear | `true`          |
-| `showThumbnails`             | `boolean`                                   | Controls if the thumbnails should appear in `carousel` displayMode | `true`          |
+| `thumbnailVisibility`             | `visible` or `hidden`                                   | Controls if the thumbnails should appear in `carousel` displayMode | `visible`          |
 | `thumbnailAspectRatio`             | `string`                                   | Sets the aspect ratio of the thumbnail image; For more information about aspect ratio, check the `aspectRatio` prop | `"auto"`          |
 | `thumbnailMaxHeight`             | `number`                                   | Maximum height for the thumbnail image (in pixels). | `150`          |
 | `thumbnailsOrientation`   | `Enum`    | Choose the orientation of the thumbnails. Can be set to `vertical` or `horizontal`                                 | `vertical`    | 
