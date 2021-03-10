@@ -109,20 +109,21 @@ const ProductImages = ({
         ))}
       </div>
     )
-  else if (displayMode === DISPLAY_MODE.FIRST_IMAGE && images[0])
-  return (
-    <div className={containerClass}>
-        <ProductImage
-          src={images[0].url}
-          alt={images[0].alt}
-          maxHeight={maxHeight}
-          zoomFactor={zoomFactor}
-          aspectRatio={aspectRatio}
-          ModalZoomElement={ModalZoomElement}
-          zoomMode={isZoomDisabled ? 'disabled' : zoomMode}
-        />
-    </div>
-  ) 
+
+  if (displayMode === DISPLAY_MODE.FIRST_IMAGE && images.length)
+    return (
+      <div className={containerClass}>
+          <ProductImage
+            src={images[0].url}
+            alt={images[0].alt}
+            maxHeight={maxHeight}
+            zoomFactor={zoomFactor}
+            aspectRatio={aspectRatio}
+            ModalZoomElement={ModalZoomElement}
+            zoomMode={isZoomDisabled ? 'disabled' : zoomMode}
+          />
+      </div>
+    ) 
 
   return (
     <div className={containerClass}>
@@ -207,7 +208,11 @@ ProductImages.propTypes = {
   ]),
   zoomFactor: PropTypes.number,
   contentType: PropTypes.oneOf(['all', 'images', 'videos']),
-  displayMode: PropTypes.oneOf([DISPLAY_MODE.CAROUSEL, DISPLAY_MODE.LIST, DISPLAY_MODE.FIRST_IMAGE]),
+  displayMode: PropTypes.oneOf([
+    DISPLAY_MODE.CAROUSEL, 
+    DISPLAY_MODE.LIST, 
+    DISPLAY_MODE.FIRST_IMAGE,
+  ]),
 }
 
 ProductImages.defaultProps = {
