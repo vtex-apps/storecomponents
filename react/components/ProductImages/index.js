@@ -109,8 +109,7 @@ const ProductImages = ({
         ))}
       </div>
     )
-
-  else if (displayMode === DISPLAY_MODE.FIRST_IMAGE)
+  else if (displayMode === DISPLAY_MODE.FIRST_IMAGE && images[0])
   return (
     <div className={containerClass}>
         <ProductImage

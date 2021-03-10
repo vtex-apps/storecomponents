@@ -290,11 +290,13 @@ class Carousel extends Component {
         'flex-ns justify-end-ns':
           isThumbsVertical &&
           position === THUMBS_POSITION_HORIZONTAL.LEFT &&
-          hasThumbs && showThumbnails,
+          hasThumbs &&
+          showThumbnails,
         'flex-ns justify-start-ns':
           isThumbsVertical &&
           position === THUMBS_POSITION_HORIZONTAL.RIGHT &&
-          hasThumbs && showThumbnails,
+          hasThumbs &&
+          showThumbnails,
       }
     )
 
@@ -313,8 +315,7 @@ class Carousel extends Component {
 
     return (
       <div className={containerClasses} aria-hidden="true">
-        {(isThumbsVertical && showThumbnails) && thumbnailSwiper}
-      
+        {isThumbsVertical && showThumbnails && thumbnailSwiper}
         <div className={imageClasses}>
           {!this.state.thumbSwiper?.destroyed && (
             <Swiper
@@ -371,7 +372,7 @@ class Carousel extends Component {
             </Swiper>
           )}
 
-          {(!isThumbsVertical && showThumbnails) && thumbnailSwiper}
+          {!isThumbsVertical && showThumbnails && thumbnailSwiper}
         </div>
       </div>
     )
@@ -390,7 +391,7 @@ Carousel.propTypes = {
   ),
   ModalZoomElement: PropTypes.any,
   displayThumbnailsArrows: PropTypes.bool,
-  showThumbnails: PropTypes.bool
+  showThumbnails: PropTypes.bool,
 }
 
 export default withCssHandles(CSS_HANDLES)(Carousel)

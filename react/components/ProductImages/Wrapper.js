@@ -16,7 +16,7 @@ const ProductImagesWrapper = props => {
     showPaginationDots,
     contentOrder,
     placeholder,
-    showThumbnails
+    showThumbnails,
   } = useResponsiveValues(
     pick(
       [
