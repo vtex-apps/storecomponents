@@ -7,6 +7,7 @@ import ProductImage from './components/ProductImage'
 import {
   THUMBS_ORIENTATION,
   THUMBS_POSITION_HORIZONTAL,
+  THUMBS_VISIBILITY,
   DEFAULT_EXCLUDE_IMAGE_WITH,
   DISPLAY_MODE,
 } from './utils/enums'
@@ -27,7 +28,7 @@ const ProductImages = ({
   thumbnailMaxHeight,
   showNavigationArrows,
   showPaginationDots,
-  showThumbnails,
+  thumbnailVisibility,
   contentOrder = 'images-first',
   zoomMode,
   zoomFactor,
@@ -142,7 +143,7 @@ const ProductImages = ({
         showNavigationArrows={showNavigationArrows}
         thumbnailsOrientation={thumbnailsOrientation}
         displayThumbnailsArrows={displayThumbnailsArrows}
-        showThumbnails={showThumbnails}
+        thumbnailVisibility={thumbnailVisibility}
         // Deprecated
         zoomProps={zoomProps}
       />
@@ -198,7 +199,10 @@ ProductImages.propTypes = {
   thumbnailMaxHeight: PropTypes.number,
   showNavigationArrows: PropTypes.bool,
   showPaginationDots: PropTypes.bool,
-  showThumbnails: PropTypes.bool,
+  thumbnailVisibility: PropTypes.oneOf([
+    THUMBS_VISIBILITY.VISIBLE,
+    THUMBS_VISIBILITY.HIDDEN
+  ]),
   contentOrder: PropTypes.oneOf(['images-first', 'videos-first']),
   zoomMode: PropTypes.oneOf([
     'disabled',
@@ -221,6 +225,7 @@ ProductImages.defaultProps = {
   zoomProps: { zoomType: 'in-page' },
   thumbnailsOrientation: THUMBS_ORIENTATION.VERTICAL,
   displayThumbnailsArrows: false,
+  thumbnailVisibility: THUMBS_VISIBILITY.VISIBLE,
   hiddenImages: DEFAULT_EXCLUDE_IMAGE_WITH,
   displayMode: DISPLAY_MODE.CAROUSEL,
 }
