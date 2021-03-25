@@ -112,9 +112,9 @@ const ProductImages = ({
     )
   }
 
-  const { url, alt } = images?.[0]
-
   if (displayMode === DISPLAY_MODE.FIRST_IMAGE && images.length) {
+    const { url, alt } = images?.[0]
+
     return (
       <div className={containerClass}>
         <ProductImage
