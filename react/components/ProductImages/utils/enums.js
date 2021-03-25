@@ -16,7 +16,7 @@ export const DISPLAY_MODE = {
 
 export const THUMBS_VISIBILITY = {
   VISIBLE: 'visible',
-  HIDDEN: 'hidden'
+  HIDDEN: 'hidden',
 }
 
 export const DEFAULT_EXCLUDE_IMAGE_WITH = 'skuvariation'

@@ -93,7 +93,7 @@ const ProductImages = ({
 
   const containerClass = `${productImagesContainerClass} ${handles.content} w-100`
 
-  if (displayMode === DISPLAY_MODE.LIST)
+  if (displayMode === DISPLAY_MODE.LIST) {
     return (
       <div className={containerClass}>
         {images.map(({ url, alt }, index) => (
@@ -110,21 +110,25 @@ const ProductImages = ({
         ))}
       </div>
     )
+  }
 
-  if (displayMode === DISPLAY_MODE.FIRST_IMAGE && images.length)
+  const { url, alt } = images?.[0]
+
+  if (displayMode === DISPLAY_MODE.FIRST_IMAGE && images.length) {
     return (
       <div className={containerClass}>
-          <ProductImage
-            src={images[0].url}
-            alt={images[0].alt}
-            maxHeight={maxHeight}
-            zoomFactor={zoomFactor}
-            aspectRatio={aspectRatio}
-            ModalZoomElement={ModalZoomElement}
-            zoomMode={isZoomDisabled ? 'disabled' : zoomMode}
-          />
+        <ProductImage
+          src={url}
+          alt={alt}
+          maxHeight={maxHeight}
+          zoomFactor={zoomFactor}
+          aspectRatio={aspectRatio}
+          ModalZoomElement={ModalZoomElement}
+          zoomMode={isZoomDisabled ? 'disabled' : zoomMode}
+        />
       </div>
-    ) 
+    )
+  }
 
   return (
     <div className={containerClass}>
@@ -201,7 +205,7 @@ ProductImages.propTypes = {
   showPaginationDots: PropTypes.bool,
   thumbnailVisibility: PropTypes.oneOf([
     THUMBS_VISIBILITY.VISIBLE,
-    THUMBS_VISIBILITY.HIDDEN
+    THUMBS_VISIBILITY.HIDDEN,
   ]),
   contentOrder: PropTypes.oneOf(['images-first', 'videos-first']),
   zoomMode: PropTypes.oneOf([
@@ -213,8 +217,8 @@ ProductImages.propTypes = {
   zoomFactor: PropTypes.number,
   contentType: PropTypes.oneOf(['all', 'images', 'videos']),
   displayMode: PropTypes.oneOf([
-    DISPLAY_MODE.CAROUSEL, 
-    DISPLAY_MODE.LIST, 
+    DISPLAY_MODE.CAROUSEL,
+    DISPLAY_MODE.LIST,
     DISPLAY_MODE.FIRST_IMAGE,
   ]),
 }
