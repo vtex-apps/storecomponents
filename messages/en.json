@@ -192,5 +192,6 @@
   "admin/editor.toTop.title": "Back to top button",
   "admin/editor.toTop.description": "When clicked it takes the page to the top",
   "admin/editor.toTop.topPixel.title": "Number of pixels",
-  "admin/editor.toTop.topPixel.description": "When exceeding the defined pixel value, the button to return to the top will appear"
+  "admin/editor.toTop.topPixel.description": "When exceeding the defined pixel value, the button to return to the top will appear",
+  "store/customCollapse.readMore": "…read more"
 }

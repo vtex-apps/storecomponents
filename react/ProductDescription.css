@@ -1,0 +1,13 @@
+.readMoreButton :global(.vtex-button):hover {
+  background-color: transparent;
+}
+
+.readMoreButton :global(.vtex-button):focus {
+  outline: none;
+}
+
+.readMoreButton :global(.vtex-button__label) {
+  padding: 0;
+  text-transform: none;
+  color: #3e5c9a;
+}
