@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Added `first-image` option for the `displayMode` prop of `product-images`.
+- Added `thumbnailVisibility` prop to `product-images`. When `dysplayMode` is set to `carousel` (default value), it adds the option to hide the thumbnails.
 
 ## [3.144.0] - 2021-05-31
 
@@ -15,7 +18,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [3.143.1] - 2021-04-28
 ### Fixed
 - Makes main SearchBar placeholder translatable
-
 ## [3.143.0] - 2021-04-19
 ### Added
 - CSS handle class for image link wrapper.
