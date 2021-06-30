@@ -110,7 +110,7 @@ function ProductName({
         {name} {showBrandName && brandName && `- ${brandName}`}
       </span>
       {showSku && skuName && (
-        <span className={`${handles.productBrand} ${skuNameClass ?? ''}`}>
+        <span className={`${handles.productSku} ${skuNameClass ?? ''}`}>
           {skuName}
         </span>
       )}
