@@ -112,7 +112,7 @@ const ProductImages = ({
     )
   }
 
-  if (displayMode === DISPLAY_MODE.FIRST_IMAGE && images.length) {
+  if (displayMode === DISPLAY_MODE.FIRST_IMAGE && images?.length) {
     const { url, alt } = images?.[0]
 
     return (
