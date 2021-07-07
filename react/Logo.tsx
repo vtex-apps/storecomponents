@@ -46,7 +46,7 @@ function Logo({
     amp,
     account,
     hints: { mobile },
-  } = useRuntime() as RenderContext.RenderContext
+  } = useRuntime() as RenderContext
 
   const { handles } = useCssHandles(CSS_HANDLES, { classes })
   const logoClassNames = `store-logo ${handles.logoContainer} ${
