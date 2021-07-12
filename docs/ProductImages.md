@@ -112,6 +112,58 @@ The following table shows the props allowed by `product-images.high-quality-imag
 | `imageSizes` | `[number]` | Image size(s) (in `px`) to be used in the image's [`srcset` HTML attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images). If no value is passed to this prop, the `srcset` will use the image original size.  | `undefined` |
 | `maxSize` | `number` | Image maximum size (in `px`) for rendering regardless of the screen size. Notice that this prop only works if you also declare the `imageSizes` prop. | `4096` |
 
+You also can wrap the main slider with another layout app, this can be useful when you will pass a floating badge over the image. The main slider is exported by `product-images.main-swiper`. Here an implementation example:
+
+```jsonc
+{
+  "product-images": {
+    "children": [
+      "flex-layout.col#productImageMain"
+    ],
+    "props": {
+      "aspectRatio": {
+        "desktop": "1:1",
+        "phone": "1:1"
+      },
+      "displayThumbnailsArrows": true,
+      "maxHeight": 445,
+      "showPaginationDots": false,
+      "zoomMode": "in-place-hover",
+      "thumbnailMaxHeight": 84,
+      "thumbnailAspectRatio": "1:1"
+    }
+  },
+  "flex-layout.col#productImageMain": {
+    "children": [
+      "stack-layout#productImageMain"
+    ],
+    "props": {
+      "preventVerticalStretch": true,
+      "verticalAlign": "middle"
+    }
+  },
+  "stack-layout#productImageMain": {
+    "props": {
+      "blockClass": "product"
+    },
+    "children": [
+      "product-images-swiper",
+      "flex-layout.col#badges"
+    ]
+  },
+  "flex-layout.col#badges": {
+    "children": [
+      "product-price-savings"
+    ],
+    "props": {
+      "blockClass": "shelf-image-badges",
+      "rowGap": 3,
+      "horizontalAlign": "right"
+    }
+  },
+}
+```
+
 #### Customization
 
 In order to apply CSS customizations on this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).

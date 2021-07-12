@@ -25,7 +25,11 @@
     "component": "ProductBrand"
   },
   "product-images": {
-    "component": "ProductImages"
+    "component": "ProductImages",
+    "composition": "children"
+  },
+  "product-images-swiper": {
+    "component": "MainImageSwiper"
   },
   "product-images.high-quality-image": {
     "component": "HighQualityProductImage"
