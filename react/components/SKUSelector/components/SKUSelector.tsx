@@ -55,6 +55,7 @@ interface Props {
   imagesMap: ImageMap
   selectedVariations: Record<string, string | null>
   hideImpossibleCombinations: boolean
+  disableUnavailableSelectOptions: boolean
   showValueForVariation: ShowValueForVariation
   showBorders?: boolean
   imageHeight?: number
@@ -115,6 +116,7 @@ interface AvailableVariationParams {
   onSelectItemMemo: (callbackItem: CallbackItem) => () => void
   skuItems: SelectorProductItem[]
   hideImpossibleCombinations: boolean
+  disableUnavailableSelectOptions: boolean
 }
 
 const parseOptionNameToDisplayOption = ({
@@ -125,6 +127,7 @@ const parseOptionNameToDisplayOption = ({
   imagesMap,
   variationCount,
   hideImpossibleCombinations,
+  disableUnavailableSelectOptions,
 }: {
   selectedVariations: SelectedVariations
   variationName: string
@@ -133,6 +136,7 @@ const parseOptionNameToDisplayOption = ({
   imagesMap: ImageMap
   variationCount: number
   hideImpossibleCombinations: boolean
+  disableUnavailableSelectOptions: boolean
 }) => (variationValue: {
   name: string
   originalName: string
@@ -172,6 +176,7 @@ const parseOptionNameToDisplayOption = ({
         isSelected,
       }),
       impossible: false,
+      disabled: disableUnavailableSelectOptions,
     }
   }
 
@@ -185,6 +190,7 @@ const parseOptionNameToDisplayOption = ({
       image,
       available: true,
       impossible: true,
+      disabled: disableUnavailableSelectOptions,
     }
   }
 
@@ -200,6 +206,7 @@ const variationNameToDisplayVariation = ({
   imagesMap,
   variationCount,
   hideImpossibleCombinations,
+  disableUnavailableSelectOptions,
 }: {
   variations: Variations
   selectedVariations: SelectedVariations
@@ -208,6 +215,7 @@ const variationNameToDisplayVariation = ({
   onSelectItemMemo: (callbackItem: CallbackItem) => () => void
   variationCount: number
   hideImpossibleCombinations: boolean
+  disableUnavailableSelectOptions: boolean
 }) => (variationName: string): DisplayVariation => {
   const name = variationName
   const { values, originalName } = variations[variationName]
@@ -221,6 +229,7 @@ const variationNameToDisplayVariation = ({
         imagesMap,
         variationCount,
         hideImpossibleCombinations,
+        disableUnavailableSelectOptions,
       })
     )
     .filter(Boolean) as DisplayOption[]
@@ -236,6 +245,7 @@ const getAvailableVariations = ({
   onSelectItemMemo,
   skuItems,
   hideImpossibleCombinations,
+  disableUnavailableSelectOptions,
 }: AvailableVariationParams): DisplayVariation[] => {
   const variationCount = Object.keys(variations).length
 
@@ -248,6 +258,7 @@ const getAvailableVariations = ({
       imagesMap,
       variationCount,
       hideImpossibleCombinations,
+      disableUnavailableSelectOptions,
     })
   )
 }
@@ -280,6 +291,7 @@ function SKUSelector({
   showVariationsLabels,
   showValueForVariation,
   hideImpossibleCombinations,
+  disableUnavailableSelectOptions,
   showVariationsErrorMessage,
   variationsSpacing: marginBottomProp,
   sliderDisplayThreshold,
@@ -308,6 +320,7 @@ function SKUSelector({
       onSelectItemMemo,
       skuItems,
       hideImpossibleCombinations,
+      disableUnavailableSelectOptions,
     }),
     [
       variations,
@@ -316,6 +329,7 @@ function SKUSelector({
       onSelectItemMemo,
       skuItems,
       hideImpossibleCombinations,
+      disableUnavailableSelectOptions,
     ]
   )
 

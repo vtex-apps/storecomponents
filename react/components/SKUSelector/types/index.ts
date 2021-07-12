@@ -34,6 +34,7 @@ export interface DisplayOption {
   image: Image | undefined
   available: boolean
   impossible: boolean
+  disabled: boolean
 }
 
 export interface DisplayVariation {
