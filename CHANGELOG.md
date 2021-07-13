@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - `onClickItem` from SKUSelector to dispatch `SET_LOADING_ITEM` action. 
 
+## [3.148.2] - 2021-07-12
+### Fixed
+- `BuyButton` when item has no `skuId`.
+- `BuyButtonMessage` when `children` array is empty.
+
+## [3.148.1] - 2021-07-08
+### Added
+- Name property to SKU selector dropdown.
+
 ## [3.148.0] - 2021-06-30
 
 ### Added

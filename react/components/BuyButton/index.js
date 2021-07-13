@@ -40,7 +40,7 @@ const isTooltipNeeded = ({ showTooltipOnSkuNotSelected, skuSelector }) => {
 const skuItemToMinicartItem = item => {
   return {
     // Important for the mutation
-    id: item.skuId,
+    id: item.skuId ?? item.id,
     seller: item.seller,
     options: item.options,
     quantity: item.quantity,
@@ -173,7 +173,7 @@ export const BuyButton = ({
         const variables = {
           orderFormId: orderFormContext.orderForm.orderFormId,
           items: skuItems.map(item => ({
-            id: item.skuId,
+            id: item.skuId ?? item.id,
             seller: item.seller,
             options: item.options,
             quantity: item.quantity,
@@ -189,7 +189,8 @@ export const BuyButton = ({
           skuItem =>
             !!items.find(
               ({ id, seller }) =>
-                id === skuItem.skuId && seller === skuItem.seller
+                (id === skuItem.skuId || id === skuItem.id) &&
+                seller === skuItem.seller
             )
         )
         await orderFormContext.refetch().catch(() => null)
@@ -201,7 +202,8 @@ export const BuyButton = ({
             skuItem =>
               !!linkStateItems.find(
                 ({ id, seller }) =>
-                  id === skuItem.skuId && seller === skuItem.seller
+                  (id === skuItem.skuId || id === skuItem.id) &&
+                  seller === skuItem.seller
               )
           )) ||
         success

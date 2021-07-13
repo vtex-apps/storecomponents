@@ -165,7 +165,9 @@ const BuyButtonWrapper = ({
       showTooltipOnSkuNotSelected={showTooltipOnSkuNotSelected}
       checkoutUrl={checkoutUrl}
     >
-      {children || (
+      {children && children.length > 0 ? (
+        children
+      ) : (
         <BuyButtonMessage showItemsPrice={showItemsPrice} skuItems={skuItems} />
       )}
     </BuyButton>
