@@ -31,6 +31,8 @@ The `Image` is a VTEX block that allows to **add any image** in the store.
 | ------------- | ---------- | -------------------------------------------------------------------------- | - |
 | `src`         | `string!`  | Specifies the URL of an image                                              | - |
 | `alt`         | `string`   | Specifies an alternate text for an image                                   | - |
+| `inlineWidth` | `number` / `string` | Specifies the image's inline width attribute  | - |
+| `inlineHeight`| `number` / `string` | Specifies the image's inline height attribute | - |
 | `maxWidth`    | `string`   | Specifies the max width of an image                                        | - |
 | `maxHeight`   | `string`   | Specifies the max height of an image                                       | - |
 | `srcset`      | `string`   | Specifies the URL of the image to use in different situations              | - |
