@@ -1,7 +1,7 @@
 import React, { FC, useMemo, useRef } from 'react'
 import { Modal } from 'vtex.modal-layout'
 import { useCssHandles, applyModifiers } from 'vtex.css-handles'
-
+import styles from './specificationDiv.css'
 import Zoomable, { ZoomMode } from './Zoomable'
 import { imageUrl } from '../utils/aspectRatioUtil'
 import ProductImageContext, {
@@ -20,7 +20,9 @@ interface Props {
   zoomFactor: number
   aspectRatio?: AspectRatio
   maxHeight?: number | string
-  ModalZoomElement?: typeof Modal
+  ModalZoomElement?: typeof Modal,
+  positionOfSpecification?: number,
+  fieldValue?: string
 }
 
 type AspectRatio = string | number
@@ -36,6 +38,8 @@ const ProductImage: FC<Props> = ({
   ModalZoomElement,
   aspectRatio = 'auto',
   zoomMode = 'in-place-click',
+  positionOfSpecification=0,
+  fieldValue=''
 }) => {
   const srcSet = useMemo(
     () =>
@@ -115,6 +119,11 @@ const ProductImage: FC<Props> = ({
             sizes="(max-width: 64.1rem) 100vw, 50vw"
           />
         </Zoomable>
+        <div className={styles.containerProdSpecification} style={{display: index==positionOfSpecification? 'flex':'none'}}>
+          <p>
+            {fieldValue}
+          </p>
+        </div>
       </div>
     </ProductImageContext.Provider>
   )

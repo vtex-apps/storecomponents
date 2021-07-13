@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useCssHandles } from 'vtex.css-handles'
-
+import { useProduct } from 'vtex.product-context'
 import Carousel from './components/Carousel'
 import ProductImage from './components/ProductImage'
 import {
@@ -32,10 +32,13 @@ const ProductImages = ({
   zoomFactor,
   ModalZoomElement,
   contentType = 'all',
+  productSpecification = {},
   // Deprecated
   zoomProps,
   displayMode,
 }) => {
+  const productCtx = useProduct()
+  const { product: productInfo } = productCtx
   if (hiddenImages && !Array.isArray(hiddenImages)) {
     hiddenImages = [hiddenImages]
   }
@@ -54,17 +57,17 @@ const ProductImages = ({
 
     return shouldIncludeImages
       ? allImages
-          .filter(
-            image =>
-              !image.imageLabel ||
-              !excludeImageRegexes.some(regex => regex.test(image.imageLabel))
-          )
-          .map(image => ({
-            type: 'image',
-            url: image.imageUrls ? image.imageUrls[0] : image.imageUrl,
-            alt: image.imageText,
-            thumbUrl: image.thumbnailUrl || image.imageUrl,
-          }))
+        .filter(
+          image =>
+            !image.imageLabel ||
+            !excludeImageRegexes.some(regex => regex.test(image.imageLabel))
+        )
+        .map(image => ({
+          type: 'image',
+          url: image.imageUrls ? image.imageUrls[0] : image.imageUrl,
+          alt: image.imageText,
+          thumbUrl: image.thumbnailUrl || image.imageUrl,
+        }))
       : []
   }, [allImages, contentType, excludeImageRegexes])
 
@@ -73,10 +76,10 @@ const ProductImages = ({
 
     return shouldIncludeVideos
       ? allVideos.map(video => ({
-          type: 'video',
-          src: video.videoUrl,
-          thumbWidth: 300,
-        }))
+        type: 'video',
+        src: video.videoUrl,
+        thumbWidth: 300,
+      }))
       : []
   }, [allVideos, contentType])
 
@@ -85,6 +88,12 @@ const ProductImages = ({
   const slides = useMemo(() => {
     return showVideosFirst ? [...videos, ...images] : [...images, ...videos]
   }, [showVideosFirst, videos, images])
+  let { position: positionOfSpecification, fieldName } = productSpecification
+  let fieldValue=''
+  productInfo.properties.forEach( specification  => {
+    if(specification.name === fieldName) fieldValue = specification.values
+  })
+  positionOfSpecification = positionOfSpecification > slides.length ? slides.length : positionOfSpecification
 
   const { zoomType: legacyZoomType } = zoomProps || {}
   const isZoomDisabled = legacyZoomType === 'no-zoom' || zoomMode === 'disabled'
@@ -126,6 +135,8 @@ const ProductImages = ({
         showNavigationArrows={showNavigationArrows}
         thumbnailsOrientation={thumbnailsOrientation}
         displayThumbnailsArrows={displayThumbnailsArrows}
+        positionOfSpecification={positionOfSpecification}
+        fieldValue={fieldValue}
         // Deprecated
         zoomProps={zoomProps}
       />

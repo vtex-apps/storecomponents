@@ -148,6 +148,8 @@ class Carousel extends Component {
       zoomFactor,
       ModalZoomElement,
       zoomProps: legacyZoomProps,
+      fieldValue,
+      positionOfSpecification
     } = this.props
 
     // Backwards compatibility
@@ -167,6 +169,8 @@ class Carousel extends Component {
             aspectRatio={aspectRatio}
             ModalZoomElement={ModalZoomElement}
             zoomMode={isZoomDisabled ? 'disabled' : zoomMode}
+            positionOfSpecification={positionOfSpecification}
+            fieldValue={fieldValue}
           />
         )
 

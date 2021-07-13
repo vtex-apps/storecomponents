@@ -1,0 +1,39 @@
+.containerProdSpecification {
+  max-width: 528px;
+
+  font-family: 'Gidole';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: -3px;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #4e4e4e;
+  padding: 4px 17px;
+
+  background-color: #eaeaea;
+}
+.containerProdSpecification p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+@media (max-width: 1366px) {
+  .containerProdSpecification {
+    max-width: 529px;
+    padding: 0 10px;
+  }
+}
+@media (max-width: 1280px) {
+  .containerProdSpecification {
+    max-width: 521px;
+  }
+}
+@media (max-width: 1024px) {
+  .containerProdSpecification {
+    max-width: 780px;
+  }
+}

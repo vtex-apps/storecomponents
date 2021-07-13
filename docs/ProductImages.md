@@ -55,6 +55,7 @@
 | `ModalZoom` | `block` | Opens a modal for product image zooming. This prop's value must match the name of the block responsible for triggering the modal containing the product image for zooming (e.g. `modal-layout` from [Modal layout](https://vtex.io/docs/components/all/vtex.modal-layout/) app). Notice that the `ModalZoom` prop will work only if the `zoomMode` prop is set as `open-modal`. To learn more, check out the [Advanced Configuration section](#Advanced-Configuration). | `undefined` |
 | `contentType` | `enum` | Controls the type of content that will be displayed in the block. Possible values are: `images`, `videos`, or `all`. | `all` |
 | `displayMode` | `enum` | Defines how the product media should be displayed. Possible values are `carousel` (displays the product images and videos in a carousel) and `list` (displays only the product images inline, with no extra markup). *Caution*: The `list` value does not display product videos and it is only compatible with the `maxHeight`, `hiddenImages`, `zoomFactor`, `aspectRatio`,`ModalZoomElement`, and `zoomMode` props. | `carousel` |
+| `productSpecification` | `object` | Allows to bring a field from product specification under the main image and you can choose in what picture this text will appear. Keys are `name` and `position` |
 
 ### Advanced configuration
 
