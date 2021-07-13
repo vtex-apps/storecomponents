@@ -88,6 +88,7 @@ const ProductImagesWrapper = props => {
       thumbnailMaxHeight={props.thumbnailMaxHeight}
       showNavigationArrows={showNavigationArrows}
       showPaginationDots={showPaginationDots}
+      thumbnailVisibility={props.thumbnailVisibility}
       contentOrder={contentOrder}
       ModalZoomElement={props.ModalZoom}
       contentType={props.contentType}

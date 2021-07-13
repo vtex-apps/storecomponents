@@ -7,6 +7,7 @@ import ProductImage from './components/ProductImage'
 import {
   THUMBS_ORIENTATION,
   THUMBS_POSITION_HORIZONTAL,
+  THUMBS_VISIBILITY,
   DEFAULT_EXCLUDE_IMAGE_WITH,
   DISPLAY_MODE,
 } from './utils/enums'
@@ -27,6 +28,7 @@ const ProductImages = ({
   thumbnailMaxHeight,
   showNavigationArrows,
   showPaginationDots,
+  thumbnailVisibility,
   contentOrder = 'images-first',
   zoomMode,
   zoomFactor,
@@ -91,7 +93,7 @@ const ProductImages = ({
 
   const containerClass = `${productImagesContainerClass} ${handles.content} w-100`
 
-  if (displayMode === DISPLAY_MODE.LIST)
+  if (displayMode === DISPLAY_MODE.LIST) {
     return (
       <div className={containerClass}>
         {images.map(({ url, alt }, index) => (
@@ -108,6 +110,25 @@ const ProductImages = ({
         ))}
       </div>
     )
+  }
+
+  if (displayMode === DISPLAY_MODE.FIRST_IMAGE && images?.length) {
+    const { url, alt } = images?.[0]
+
+    return (
+      <div className={containerClass}>
+        <ProductImage
+          src={url}
+          alt={alt}
+          maxHeight={maxHeight}
+          zoomFactor={zoomFactor}
+          aspectRatio={aspectRatio}
+          ModalZoomElement={ModalZoomElement}
+          zoomMode={isZoomDisabled ? 'disabled' : zoomMode}
+        />
+      </div>
+    )
+  }
 
   return (
     <div className={containerClass}>
@@ -126,6 +147,7 @@ const ProductImages = ({
         showNavigationArrows={showNavigationArrows}
         thumbnailsOrientation={thumbnailsOrientation}
         displayThumbnailsArrows={displayThumbnailsArrows}
+        thumbnailVisibility={thumbnailVisibility}
         // Deprecated
         zoomProps={zoomProps}
       />
@@ -181,6 +203,10 @@ ProductImages.propTypes = {
   thumbnailMaxHeight: PropTypes.number,
   showNavigationArrows: PropTypes.bool,
   showPaginationDots: PropTypes.bool,
+  thumbnailVisibility: PropTypes.oneOf([
+    THUMBS_VISIBILITY.VISIBLE,
+    THUMBS_VISIBILITY.HIDDEN,
+  ]),
   contentOrder: PropTypes.oneOf(['images-first', 'videos-first']),
   zoomMode: PropTypes.oneOf([
     'disabled',
@@ -190,7 +216,11 @@ ProductImages.propTypes = {
   ]),
   zoomFactor: PropTypes.number,
   contentType: PropTypes.oneOf(['all', 'images', 'videos']),
-  displayMode: PropTypes.oneOf([DISPLAY_MODE.CAROUSEL, DISPLAY_MODE.LIST]),
+  displayMode: PropTypes.oneOf([
+    DISPLAY_MODE.CAROUSEL,
+    DISPLAY_MODE.LIST,
+    DISPLAY_MODE.FIRST_IMAGE,
+  ]),
 }
 
 ProductImages.defaultProps = {
@@ -199,6 +229,7 @@ ProductImages.defaultProps = {
   zoomProps: { zoomType: 'in-page' },
   thumbnailsOrientation: THUMBS_ORIENTATION.VERTICAL,
   displayThumbnailsArrows: false,
+  thumbnailVisibility: THUMBS_VISIBILITY.VISIBLE,
   hiddenImages: DEFAULT_EXCLUDE_IMAGE_WITH,
   displayMode: DISPLAY_MODE.CAROUSEL,
 }
